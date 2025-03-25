@@ -1,0 +1,86 @@
+.animated-text-container {
+  position: relative;
+  display: inline-block;
+  cursor: default;
+  overflow: hidden;
+  padding: 0.5rem 0;
+}
+
+.animated-text {
+  position: relative;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--dark-color);
+  white-space: nowrap;
+}
+
+.animated-text-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: transparent;
+  pointer-events: none;
+  clip-path: ellipse(120px 120px at var(--mouse-x) var(--mouse-y));
+  background: linear-gradient(
+    135deg,
+    var(--highlight-color) 0%,
+    var(--primary-light) 50%,
+    var(--highlight-color) 100%
+  );
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.animated-char {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: calc(var(--char-index) * 0.03s);
+}
+
+.animated-text-container:hover .animated-char {
+  transform: translateY(-5px);
+}
+
+/* Add wave effect on hover */
+.animated-text-container:hover .animated-text .animated-char {
+  animation: wave 1s ease-in-out infinite;
+  animation-delay: calc(var(--char-index) * 0.05s);
+}
+
+@keyframes wave {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .animated-text {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .animated-text {
+    font-size: 1.5rem;
+  }
+} 

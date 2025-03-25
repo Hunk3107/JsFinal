@@ -1,0 +1,135 @@
+.magnetic-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 160, 73, 0.2);
+}
+
+.magnetic-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.magnetic-button:hover {
+  box-shadow: 0 6px 15px rgba(0, 160, 73, 0.25);
+}
+
+.magnetic-button:hover::before {
+  opacity: 1;
+}
+
+.magnetic-button:active {
+  transform: scale(0.98);
+}
+
+.magnetic-button-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+/* Pulse effect - chỉ áp dụng cho nút không phải filter */
+.magnetic-button:not(.filter-magnetic-button)::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--primary-color);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transform: scale(1.2);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.magnetic-button:not(.filter-magnetic-button):hover::after {
+  opacity: 0.2;
+  transform: scale(1.1);
+  animation: subtle-pulse 2s infinite;
+}
+
+@keyframes subtle-pulse {
+  0% {
+    transform: scale(1.05);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.1;
+  }
+  100% {
+    transform: scale(1.05);
+    opacity: 0.2;
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .magnetic-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Filter button styles */
+.filter-magnetic-button {
+  background-color: var(--gray-100) !important;
+  color: var(--gray-700) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05) !important;
+  transition: all 0.2s ease !important;
+  padding: 0.6rem 1.2rem;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.filter-magnetic-button:hover {
+  background-color: var(--gray-200) !important;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08) !important;
+  transform: translateY(-2px) !important;
+}
+
+.filter-magnetic-button.active {
+  background-color: var(--primary-color) !important;
+  color: var(--light-color) !important;
+  box-shadow: 0 3px 8px rgba(0, 160, 73, 0.2) !important;
+}
+
+.add-to-cart-btn {
+  width: 100%;
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  box-shadow: 0 3px 8px rgba(0, 160, 73, 0.15);
+}
+
+.add-to-cart-btn:hover {
+  background-color: var(--primary-dark);
+  box-shadow: 0 4px 12px rgba(0, 160, 73, 0.25);
+  transform: translateY(-2px);
+} 

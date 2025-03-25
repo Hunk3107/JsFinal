@@ -1,0 +1,91 @@
+.parallax-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transform: perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1);
+  transition: transform 0.1s ease-out;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  background-color: var(--light-color);
+  will-change: transform;
+  cursor: pointer;
+}
+
+.parallax-card.is-hovered {
+  transition: transform 0.2s ease-out;
+}
+
+.parallax-card-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem;
+  transform: translateZ(50px);
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+}
+
+.parallax-card-glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--glare-x) var(--glare-y),
+    rgba(255, 255, 255, var(--glare-opacity)),
+    transparent 50%
+  );
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.parallax-card.is-hovered .parallax-card-glare {
+  opacity: 1;
+}
+
+/* Add depth to child elements */
+.parallax-card img {
+  transform: translateZ(60px);
+  transition: transform 0.2s ease-out;
+}
+
+.parallax-card h3 {
+  transform: translateZ(40px);
+  transition: transform 0.2s ease-out;
+}
+
+.parallax-card p {
+  transform: translateZ(30px);
+  transition: transform 0.2s ease-out;
+}
+
+.parallax-card button {
+  transform: translateZ(50px);
+  transition: transform 0.2s ease-out;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .parallax-card {
+    transform: none !important;
+  }
+  
+  .parallax-card-content,
+  .parallax-card img,
+  .parallax-card h3,
+  .parallax-card p,
+  .parallax-card button {
+    transform: none !important;
+  }
+  
+  .parallax-card-glare {
+    display: none;
+  }
+} 
